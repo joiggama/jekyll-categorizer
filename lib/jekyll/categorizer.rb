@@ -24,10 +24,10 @@ module Jekyll
       def initialize(site, category)
         @site  = site
         @base  = site.source
-        @dir   = site.config['categorizer']['dir'].gsub(/^\/*(.*)\/*$/, '\1')
+        @dir   = site.config["jekyll_categorizer"]["namespace"].gsub(/^\/*(.*)\/*$/, '\1')
         @name  = "#{category}.html"
 
-        template_path = File.join(@base, '_layouts', "#{site.config['categorizer']['layout']}.html")
+        template_path = File.join(@base, "_layouts", "#{site.config["jekyll_categorizer"]["layout"]}.html")
 
         self.process(@name)
 
@@ -36,7 +36,7 @@ module Jekyll
           template_dir    = File.dirname(template_path)
           template        = File.basename(template_path)
           self.read_yaml(template_dir, template)
-          self.data['category']    = category
+          self.data["category"]    = category
         else
           @perform_render = false
         end
